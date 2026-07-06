@@ -1,0 +1,381 @@
+/* =====================================================
+   DESIGN TOKENS
+   A dark "code editor" palette — deep plum-black rather than pure black,
+   with amber standing in for keywords and teal for strings, echoing real
+   syntax highlighting themes without copying any specific editor exactly. */
+:root {
+  --bg-deep:     #171320;   /* main page background */
+  --bg-panel:    #1f1a2b;   /* title bar / tab bar / card backgrounds */
+  --bg-raised:   #241f33;   /* slightly lighter, for hovered/raised elements */
+  --line:        #322c44;   /* subtle borders and dividers */
+  --text-main:   #e7e2f2;   /* primary text */
+  --text-muted:  #8d84a8;   /* comments, secondary text, gutter numbers */
+  --amber:       #eab35c;   /* keywords, primary accent, buttons */
+  --teal:        #6fc2b0;   /* strings, secondary accent */
+  --pink:        #e07a9c;   /* punctuation accent, used sparingly */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.7;
+}
+
+/* Reusable "syntax highlight" spans used inside headings/paragraphs */
+.code-keyword { color: var(--amber); font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+.code-string  { color: var(--teal);  font-family: 'JetBrains Mono', monospace; }
+.code-punct   { color: var(--pink);  font-family: 'JetBrains Mono', monospace; }
+
+.comment {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+/* =====================================================
+   FAKE TITLE BAR — mimics a code editor's window chrome */
+.title-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 20px;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--line);
+}
+
+.title-bar__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;   /* turns each square span into a circle */
+}
+
+.dot--red    { background: #e0605a; }
+.dot--yellow { background: #e8b84f; }
+.dot--green  { background: #5cbd6e; }
+
+.title-bar__path {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+/* =====================================================
+   TAB BAR — doubles as the site's navigation */
+.tab-bar {
+  display: flex;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;           /* lets tabs scroll sideways on very narrow phones instead of wrapping */
+  position: sticky;           /* stays pinned to the top of the viewport while scrolling the page */
+  top: 0;
+  z-index: 10;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;             /* removes the default underline from the <a> */
+  border-right: 1px solid var(--line);
+  border-bottom: 2px solid transparent;   /* reserved space so the active underline doesn't shift layout */
+  white-space: nowrap;                /* keeps "about.html" etc. from wrapping mid-word */
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tab:hover {
+  background: var(--bg-raised);
+  color: var(--text-main);
+}
+
+.tab--active {
+  color: var(--amber);
+  background: var(--bg-deep);           /* matches page bg so the active tab looks "open" */
+  border-bottom: 2px solid var(--amber);
+}
+
+.tab__icon {
+  font-size: 8px;
+  color: var(--teal);
+}
+
+/* =====================================================
+   SECTIONS — each one has a decorative line-number gutter on the left,
+   like the margin of a real code editor. */
+.section {
+  display: flex;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 70px 32px;
+  border-bottom: 1px solid var(--line);
+}
+
+.gutter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #4a4362;               /* dimmer than muted text — these numbers are just texture */
+  text-align: right;
+  flex-shrink: 0;                /* the gutter keeps its width even if content is short */
+  padding-top: 4px;
+  user-select: none;              /* the numbers can't be highlighted/selected by accident */
+}
+
+.section__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.section__title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 26px;
+  color: var(--text-main);
+  margin-bottom: 24px;
+}
+
+/* =====================================================
+   HERO */
+.hero {
+  padding-top: 90px;
+}
+
+.hero__name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(22px, 4vw, 34px);   /* scales between 22px and 34px depending on screen width */
+  font-weight: 700;
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+
+.hero__tagline {
+  font-size: 18px;
+  color: var(--text-main);
+  margin-bottom: 14px;
+  max-width: 60ch;    /* caps line length at ~60 characters so paragraphs stay easy to read */
+}
+
+.hero__detail {
+  color: var(--text-muted);
+  max-width: 60ch;
+}
+
+/* A blinking text cursor, purely decorative, echoing a code editor's caret */
+.hero__cursor {
+  width: 10px;
+  height: 22px;
+  background: var(--amber);
+  margin-top: 28px;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }   /* halfway through each cycle, fade out — creates the blinking effect */
+}
+
+/* =====================================================
+   SKILLS */
+.skill-list {
+  list-style: none;      /* removes the default bullet points from the <ul> */
+}
+
+.skill {
+  margin-bottom: 22px;
+}
+
+.skill__line {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.skill__bar {
+  width: 100%;
+  max-width: 320px;
+  height: 6px;
+  background: var(--bg-raised);
+  border-radius: 4px;
+  overflow: hidden;     /* keeps the fill's rounded corners contained inside the bar */
+}
+
+.skill__fill {
+  height: 100%;
+  width: 0%;                          /* starts at 0, JS animates it up to its real value */
+  background: linear-gradient(90deg, var(--teal), var(--amber));
+  border-radius: 4px;
+  transition: width 1.1s ease;
+}
+
+.skill-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* =====================================================
+   PROJECTS */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  /* auto-fit + minmax lets the grid decide how many columns fit, and each
+     column stretches to fill leftover space, without a fixed column count */
+  gap: 18px;
+}
+
+.project-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);    /* lifts the card slightly on hover for a tactile feel */
+  border-color: var(--amber);
+}
+
+.project-card__file {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.project-card h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.project-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* =====================================================
+   CONTACT FORM */
+.contact-form {
+  max-width: 420px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-field label,
+.form-field legend {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--amber);
+  margin-bottom: 8px;
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"] {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  padding: 10px 12px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text-main);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.form-field input[type="text"]:focus,
+.form-field input[type="email"]:focus {
+  border-color: var(--amber);
+}
+
+.form-field--radio {
+  border: none;               /* removes the default <fieldset> border so it matches other fields */
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-main);
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.submit-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 24px;
+  background: var(--amber);
+  color: var(--bg-deep);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  align-self: flex-start;    /* stops the button from stretching to the full form width */
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.submit-btn:hover {
+  background: #f5c37a;
+}
+
+.submit-btn:active {
+  transform: scale(0.97);
+}
+
+.form-status {
+  margin-top: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--teal);
+}
+
+/* =====================================================
+   FOOTER */
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* =====================================================
+   RESPONSIVE — collapse the gutter + tighten spacing on small screens */
+@media (max-width: 640px) {
+  .section {
+    padding: 50px 20px;
+    gap: 14px;
+  }
+
+  .gutter {
+    display: none;   /* the decorative line numbers aren't worth the width on small phones */
+  }
+
+  .tab {
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+}

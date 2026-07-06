@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sai Gowtham Adithya — Portfolio</title>
+
+  <!-- JetBrains Mono: a real code-editor font, used for all the "chrome" (tabs, labels, headings).
+       Inter: a clean sans-serif used for actual paragraph text so long sentences stay easy to read. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ FAKE EDITOR TITLE BAR ============ -->
+  <div class="title-bar">
+    <div class="title-bar__dots">
+      <span class="dot dot--red"></span>
+      <span class="dot dot--yellow"></span>
+      <span class="dot dot--green"></span>
+    </div>
+    <span class="title-bar__path">sai-gowtham — portfolio.html</span>
+  </div>
+
+  <!-- ============ TAB BAR = MAIN NAVIGATION ============
+       Each "tab" looks like an open file in an editor. They're just anchor
+       links (#about, #skills...) jumping to the matching section below. -->
+  <nav class="tab-bar">
+    <a href="#about" class="tab tab--active">
+      <span class="tab__icon">●</span>about.html
+    </a>
+    <a href="#skills" class="tab">
+      <span class="tab__icon">●</span>skills.js
+    </a>
+    <a href="#projects" class="tab">
+      <span class="tab__icon">●</span>projects.md
+    </a>
+    <a href="#contact" class="tab">
+      <span class="tab__icon">●</span>contact.py
+    </a>
+  </nav>
+
+  <main>
+
+    <!-- ============ HERO / ABOUT ============ -->
+    <section id="about" class="section hero">
+      <div class="gutter" aria-hidden="true">
+        <!-- aria-hidden="true" tells screen readers to skip this — it's purely decorative,
+             like the line-number column down the side of a real code editor. -->
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+      </div>
+
+      <div class="section__content">
+        <p class="comment">/* Welcome to my portfolio */</p>
+
+        <h1 class="hero__name">
+          <span class="code-keyword">const</span> developer
+          <span class="code-punct">=</span> <span class="code-string">"Sai Gowtham Adithya"</span><span class="code-punct">;</span>
+        </h1>
+
+        <p class="hero__tagline">
+          I am a web-passionate developer with a focus on front-end technologies.
+        </p>
+
+        <p class="hero__detail">
+          Currently pursuing a degree in <em>Data Science</em>, with hands-on basics in HTML —
+          and CSS &amp; JavaScript coming up next.
+        </p>
+
+        <div class="hero__cursor" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section id="skills" class="section">
+      <div class="gutter" aria-hidden="true">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+      </div>
+
+      <div class="section__content">
+        <p class="comment">// Skills currently imported</p>
+        <h2 class="section__title">My Skills</h2>
+
+        <!-- Each skill is one "import" line, with a small progress bar underneath
+             showing rough proficiency. Replace the widths in style.css / data-level
+             below as your skills grow. -->
+        <ul class="skill-list">
+
+          <li class="skill" data-level="70">
+            <p class="skill__line">
+              <span class="code-keyword">import</span> { HTML }
+              <span class="code-keyword">from</span> <span class="code-string">'fundamentals'</span>;
+            </p>
+            <div class="skill__bar"><div class="skill__fill"></div></div>
+          </li>
+
+          <li class="skill" data-level="45">
+            <p class="skill__line">
+              <span class="code-keyword">import</span> { SQL }
+              <span class="code-keyword">from</span> <span class="code-string">'databases'</span>;
+            </p>
+            <div class="skill__bar"><div class="skill__fill"></div></div>
+          </li>
+
+          <li class="skill" data-level="40">
+            <p class="skill__line">
+              <span class="code-keyword">import</span> { R }
+              <span class="code-keyword">from</span> <span class="code-string">'statistics'</span>;
+            </p>
+            <div class="skill__bar"><div class="skill__fill"></div></div>
+          </li>
+
+          <li class="skill" data-level="35">
+            <p class="skill__line">
+              <span class="code-keyword">import</span> { Python }
+              <span class="code-keyword">from</span> <span class="code-string">'data-science'</span>;
+            </p>
+            <div class="skill__bar"><div class="skill__fill"></div></div>
+          </li>
+
+        </ul>
+        <p class="skill-note">// proficiency bars are rough estimates — tweak the data-level values as you grow</p>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============
+         Your original page had a "Projects" button but no project content —
+         these are placeholder cards so the link actually leads somewhere.
+         Swap in your real projects whenever you have them. -->
+    <section id="projects" class="section">
+      <div class="gutter" aria-hidden="true">
+        <span>1</span><span>2</span><span>3</span><span>4</span>
+      </div>
+
+      <div class="section__content">
+        <p class="comment"># Projects folder</p>
+        <h2 class="section__title">Projects</h2>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <p class="project-card__file">📄 project-01.md</p>
+            <h3>Add your first project</h3>
+            <p>A short description of what it does, and the tools you used to build it.</p>
+          </article>
+
+          <article class="project-card">
+            <p class="project-card__file">📄 project-02.md</p>
+            <h3>Add your second project</h3>
+            <p>Once you've finished a CSS/JS project, drop the details in here.</p>
+          </article>
+
+          <article class="project-card">
+            <p class="project-card__file">📄 project-03.md</p>
+            <h3>Add your third project</h3>
+            <p>A data science mini-project using Python, R or SQL works great here too.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="section">
+      <div class="gutter" aria-hidden="true">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+      </div>
+
+      <div class="section__content">
+        <p class="comment"># Contact form</p>
+        <h2 class="section__title">Contact Information</h2>
+        <p class="hero__detail">Feel free to reach out to me!</p>
+
+        <form id="contactForm" class="contact-form" novalidate>
+
+          <div class="form-field">
+            <label for="Name">name <span class="code-punct">=</span></label>
+            <input type="text" id="Name" name="Name" placeholder="\"Your full name\"" required>
+          </div>
+
+          <div class="form-field">
+            <label for="email">email <span class="code-punct">=</span></label>
+            <input type="email" id="email" name="email" placeholder="\"you@example.com\"" required>
+          </div>
+
+          <fieldset class="form-field form-field--radio">
+            <legend>gender <span class="code-punct">=</span></legend>
+            <label class="radio-option">
+              <input type="radio" id="male" name="gender" value="male">
+              <span>Male</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" id="female" name="gender" value="female">
+              <span>Female</span>
+            </label>
+          </fieldset>
+
+          <button type="submit" class="submit-btn">
+            <span class="code-keyword">run</span>(sendMessage)
+          </button>
+
+          <!-- Hidden until script.js reveals it after a successful "submit" -->
+          <p id="formStatus" class="form-status" hidden>✓ Message received — thanks for reaching out!</p>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="comment">/* end of file */</p>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
